@@ -59,6 +59,12 @@ public:
 		return itemRetail;
 	}
 
+};
+
+class UserFunctions {
+private:
+public:
 	// cpp functions
-	void userOptions();
+	void userOptions(InventoryManagementBasic *item);
+	void createItem();
 };
