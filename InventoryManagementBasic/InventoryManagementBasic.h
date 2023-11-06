@@ -66,5 +66,5 @@ private:
 public:
 	// cpp functions
 	void userOptions(InventoryManagementBasic *item);
-	void createItem();
+	void createItem(InventoryManagementBasic* item);
 };
