@@ -1,7 +1,10 @@
 #pragma once
 #include <iostream>
 #include <string>
-using namespace std;
+#include <fstream>
+using std::cout; using std::cin;	// performance better than namespace
+using std::string; using std::fstream;
+using std::ios; using std::endl;
 
 class InventoryManagementBasic {
 private:
