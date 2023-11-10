@@ -4,7 +4,16 @@ void placeHolder() {
 	cout << "\n\nUnder construction, select another option\n\n";
 }
 
-void UserFunctions::createItem(InventoryManagementBasic* item) {
+void UserFunctions::genItems(vector<InventoryManagementBasic> *items, int length, string name, int count, double cost, double retail) {
+	for (int i = 0; i < length; i++) {
+		(*items)[i].setName(name);
+		(*items)[i].setCount(count);
+		(*items)[i].setCost(cost);
+		(*items)[i].setRetail(retail);
+	}
+}
+
+void UserFunctions::createItem(vector<InventoryManagementBasic>* items) {
 	// in the future, create item will append an item file
 	// the item file will keep track of items created
 	// the file will be read and each line will create an instance of Item
@@ -21,16 +30,11 @@ void UserFunctions::createItem(InventoryManagementBasic* item) {
 	cin >> createCost;
 	cout << "Retail: ";
 	cin >> createRetail;
-
-	item->setName(createName);
-	item->setCount(createCount);
-	item->setCost(createCost);
-	item->setRetail(createRetail);
 }
 
 // menu
 
-void UserFunctions::userOptions(InventoryManagementBasic* item) {
+void UserFunctions::userOptions(vector<InventoryManagementBasic>* items, int length) {
 	int input;
 	cout << "Pick one:\n";
 	cout << "	1. Create item\n";
@@ -44,11 +48,15 @@ void UserFunctions::userOptions(InventoryManagementBasic* item) {
 	switch (input)
 	{
 	case 1:
-		createItem(item);
+		placeHolder();
 		break;
 	case 2:
-		cout << item->getName() << endl;
-		cout << item->getCount() << endl;
+		for (int i = 0; i < length; i++) {
+			cout << (*items)[i].getName();
+			cout << (*items)[i].getCount();
+			cout << (*items)[i].getCost();
+			cout << (*items)[i].getRetail();
+		}
 		break;
 	case 3:
 		placeHolder();

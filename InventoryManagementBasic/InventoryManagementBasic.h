@@ -2,9 +2,10 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <vector>
 using std::cout; using std::cin;	// performance better than namespace
 using std::string; using std::fstream;
-using std::ios; using std::endl;
+using std::ios; using std::endl; using std::vector;
 
 class InventoryManagementBasic {
 private:
@@ -68,6 +69,7 @@ class UserFunctions {
 private:
 public:
 	// cpp functions
-	void userOptions(InventoryManagementBasic *item);
-	void createItem(InventoryManagementBasic* item);
+	void genItems(vector<InventoryManagementBasic>* items, int length, string name, int count, double cost, double retail);
+	void userOptions(vector<InventoryManagementBasic> *items, int length);
+	void createItem(vector<InventoryManagementBasic> *items);
 };
