@@ -4,13 +4,21 @@ void placeHolder() {
 	cout << "\n\nUnder construction, select another option\n\n";
 }
 
-void UserFunctions::genItems(vector<InventoryManagementBasic> *items, int length, string name, int count, double cost, double retail) {
-	for (int i = 0; i < length; i++) {
-		(*items)[i].setName(name);
-		(*items)[i].setCount(count);
-		(*items)[i].setCost(cost);
-		(*items)[i].setRetail(retail);
+void UserFunctions::genItems(vector<InventoryManagementBasic> *items, fstream &itemsFile) {
+	// temp vars
+	string description = "undefined"; int count = 0; double cost = 0.0, retail = 0.0;
+	
+	while (!itemsFile.eof()) {
+		itemsFile >> description;
+		itemsFile >> count;
+		itemsFile >> cost;
+		itemsFile >> retail;
+
+		InventoryManagementBasic item(description, count, cost, retail);
+		items->push_back(item);
 	}
+
+	itemsFile.close();
 }
 
 void UserFunctions::createItem(vector<InventoryManagementBasic>* items) {
@@ -20,16 +28,26 @@ void UserFunctions::createItem(vector<InventoryManagementBasic>* items) {
 	// after the use of the program, the items will be destroyed, until needed again
 	
 	// cins will only be for console build. Once moved to GUI this will be changed
-	string createName; int createCount; double createCost, createRetail;
-	
-	cout << "Create Item\nDescription: ";
-	cin >> createName;
-	cout << "Count: ";
+	string createDescription; int createCount; double createCost, createRetail;
+	fstream itemsFile("itemList.txt", std::ios_base::app);
+
+	cout << "Enter item description: ";
+	cin >> createDescription;
+	cout << "Enter item count: ";
 	cin >> createCount;
-	cout << "Cost: ";
+	cout << "Enter item cost per unit: ";
 	cin >> createCost;
-	cout << "Retail: ";
+	cout << "Enter item retail price per unit: ";
 	cin >> createRetail;
+
+	itemsFile << createDescription << endl;
+	itemsFile << createCount << endl;
+	itemsFile << createCost << endl;
+	itemsFile << createRetail << endl;
+
+	itemsFile.close();
+	InventoryManagementBasic item(createDescription, createCount, createCost, createRetail);
+	items->push_back(item);
 }
 
 // menu
@@ -48,14 +66,14 @@ void UserFunctions::userOptions(vector<InventoryManagementBasic>* items, int len
 	switch (input)
 	{
 	case 1:
-		placeHolder();
+		createItem(items);
 		break;
 	case 2:
 		for (int i = 0; i < length; i++) {
-			cout << (*items)[i].getName();
-			cout << (*items)[i].getCount();
-			cout << (*items)[i].getCost();
-			cout << (*items)[i].getRetail();
+			cout << "Description: " << (*items)[i].getName() << endl;
+			cout << "Count: " << (*items)[i].getCount() << endl;
+			cout << "Cost: " << (*items)[i].getCost() << endl;
+			cout << "Retail: " << (*items)[i].getRetail() << endl;
 		}
 		break;
 	case 3:

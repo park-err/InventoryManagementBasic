@@ -30,9 +30,7 @@ public:
 		setRetail(retail);
 	}
 
-	~InventoryManagementBasic() {
-		cout << "Item deleted\n";
-	}
+	~InventoryManagementBasic() {}
 
 	// setter functions
 	void setName(string name) {
@@ -69,7 +67,7 @@ class UserFunctions {
 private:
 public:
 	// cpp functions
-	void genItems(vector<InventoryManagementBasic>* items, int length, string name, int count, double cost, double retail);
+	void genItems(vector<InventoryManagementBasic>* items, fstream &itemsFile);
 	void userOptions(vector<InventoryManagementBasic> *items, int length);
 	void createItem(vector<InventoryManagementBasic> *items);
 };
