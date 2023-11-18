@@ -6,15 +6,16 @@ void placeHolder() {
 
 void UserFunctions::genItems(vector<InventoryManagementBasic> *items, fstream &itemsFile) {
 	// temp vars
-	string description = "undefined"; int count = 0; double cost = 0.0, retail = 0.0;
+	float sku = 0; string description = "undefined"; int count = 0; double cost = 0.0, retail = 0.0;
 	
 	while (!itemsFile.eof()) {
+		itemsFile >> sku;
 		itemsFile >> description;
 		itemsFile >> count;
 		itemsFile >> cost;
 		itemsFile >> retail;
 
-		InventoryManagementBasic item(description, count, cost, retail);
+		InventoryManagementBasic item(sku, description, count, cost, retail);
 		items->push_back(item);
 	}
 
@@ -40,14 +41,36 @@ void UserFunctions::createItem(vector<InventoryManagementBasic>* items) {
 	cout << "Enter item retail price per unit: ";
 	cin >> createRetail;
 
+	float createSKU = (items->back().getSKU()) + 1;
+	itemsFile << createSKU << endl;
 	itemsFile << createDescription << endl;
 	itemsFile << createCount << endl;
 	itemsFile << createCost << endl;
 	itemsFile << createRetail << endl;
 
 	itemsFile.close();
-	InventoryManagementBasic item(createDescription, createCount, createCost, createRetail);
+	InventoryManagementBasic item(createSKU, createDescription, createCount, createCost, createRetail);
 	items->push_back(item);
+}
+
+void UserFunctions::genSales(vector<InventoryManagementBasic>* items) {
+	// will read a file instead
+	// mapping out basic functionality
+	int quantitySold = 0; double revenue;
+	cout << "Quantity Sold: "; cin >> quantitySold;
+	cout << "Revenue Made: "; cin >> revenue;
+
+	// maybe add a function to call that will find item based on sku
+	double expected = quantitySold * ((*items)[0].getRetail());
+	double discount = revenue - expected;
+
+	// will write to a file. file can be referenced when running reports
+	cout << "Item sold: " << (*items)[0].getName() << endl;
+	cout << "Retail: " << expected << endl;
+	cout << "Discount: " << discount << endl;
+	cout << "Revenue: " << revenue << endl;
+
+	// quantities will be subtracted from respective items
 }
 
 // menu
@@ -70,6 +93,7 @@ void UserFunctions::userOptions(vector<InventoryManagementBasic>* items, int len
 		break;
 	case 2:
 		for (int i = 0; i < length; i++) {
+			cout << "\nSKU: " << (*items)[i].getSKU() << endl;
 			cout << "Description: " << (*items)[i].getName() << endl;
 			cout << "Count: " << (*items)[i].getCount() << endl;
 			cout << "Cost: " << (*items)[i].getCost() << endl;
@@ -80,7 +104,7 @@ void UserFunctions::userOptions(vector<InventoryManagementBasic>* items, int len
 		placeHolder();
 		break;
 	case 4:
-		placeHolder();
+		genSales(items);
 		break;
 	case 5:
 		placeHolder();

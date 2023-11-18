@@ -9,6 +9,7 @@ using std::ios; using std::endl; using std::vector;
 
 class InventoryManagementBasic {
 private:
+	float itemSKU;
 	string itemName;
 	int itemCount;
 	double itemCost;
@@ -17,13 +18,15 @@ private:
 public:
 
 	InventoryManagementBasic() {
+		itemSKU = 700000;
 		itemName = "default_item";
 		itemCount = 0;
 		itemCost = 0;
 		itemRetail = 0;
 	}
 	
-	InventoryManagementBasic(string name, int count, double cost, double retail) {
+	InventoryManagementBasic(float sku, string name, int count, double cost, double retail) {
+		setSKU(sku);
 		setName(name);
 		setCount(count);
 		setCost(cost);
@@ -33,6 +36,9 @@ public:
 	~InventoryManagementBasic() {}
 
 	// setter functions
+	void setSKU(float sku) {
+		itemSKU = sku;
+	}
 	void setName(string name) {
 		itemName = name;
 	}
@@ -47,6 +53,9 @@ public:
 	}
 
 	// getter functions
+	float getSKU() {
+		return itemSKU;
+	}
 	string getName() {
 		return itemName;
 	}
@@ -60,7 +69,6 @@ public:
 	double getRetail() {
 		return itemRetail;
 	}
-
 };
 
 class UserFunctions {
@@ -70,4 +78,5 @@ public:
 	void genItems(vector<InventoryManagementBasic>* items, fstream &itemsFile);
 	void userOptions(vector<InventoryManagementBasic> *items, int length);
 	void createItem(vector<InventoryManagementBasic> *items);
+	void genSales(vector<InventoryManagementBasic> *items);
 };
