@@ -78,7 +78,8 @@ public:
 	void userOptions(vector<InventoryManagementBasic> *items, int length);
 	void createItem(vector<InventoryManagementBasic> *items);
 	int genSales(vector<InventoryManagementBasic> *items);
-
+  
+  // create new class for functions below this comment
 	int findItemFromSKU(vector<InventoryManagementBasic>* items, float SKU) {
 		for (int i = 0; i < items->size(); i++) {
 			if ((*items)[i].getSKU() == SKU) {
