@@ -4,6 +4,30 @@ void placeHolder() {
 	cout << "\n\nUnder construction, select another option\n\n";
 }
 
+int findMidPoint(int min, int max) {
+	return ((max + min) / 2);
+}
+
+int binarySearch(float key, vector<InventoryManagementBasic>* items, int min, int max) {
+	if (max < min || key > items->back().getSKU() || key < items->front().getSKU()) {
+		return -1;
+	}
+	else {
+		int midpoint = findMidPoint(min, max);
+		int vecMid = (*items)[midpoint].getSKU();
+
+		if (vecMid < key) {
+			binarySearch(key, items, ++midpoint, max);
+		}
+		else if (vecMid > key) {
+			binarySearch(key, items, min, --midpoint);
+		}
+		else {
+			return midpoint;
+		}
+	}
+}
+
 void UserFunctions::genItems(vector<InventoryManagementBasic> *items, fstream &itemsFile) {
 	// temp vars
 	float sku = 0; string description = "undefined"; int count = 0; double cost = 0.0, retail = 0.0;
@@ -53,24 +77,61 @@ void UserFunctions::createItem(vector<InventoryManagementBasic>* items) {
 	items->push_back(item);
 }
 
-void UserFunctions::genSales(vector<InventoryManagementBasic>* items) {
+int UserFunctions::genSales(vector<InventoryManagementBasic>* items) {
 	// will read a file instead
 	// mapping out basic functionality
-	int quantitySold = 0; double revenue;
-	cout << "Quantity Sold: "; cin >> quantitySold;
-	cout << "Revenue Made: "; cin >> revenue;
+	// FIXME: FILE VALIDATION | CHARS WILL BREAK
+	float tempSKU; int tempSold; double tempRev;
+	vector<float> soldSKU; vector<int> quantitySold; vector<double> revenue;
+	fstream salesFile("salesFileEx.txt", ios::in);
+	fstream itemsFile("itemList.txt", std::ios_base::app);
+
+	if (!salesFile || !itemsFile) {
+		// if items file cannot be opened, program should not progess this far
+		cout << "Error: No sales file detected";
+		return 0;
+	}
+	else {
+		while (!salesFile.eof()) {
+			salesFile >> tempSKU;
+			salesFile >> tempSold;
+			salesFile >> tempRev;
+
+			int selectedSKU = binarySearch(tempSKU, items, 0, items->size());
+			if (selectedSKU == -1) {
+				cout << "\n\nERROR: File contains SKU that does not exist\n";
+				return 0;
+			}
+
+			soldSKU.push_back(tempSKU);
+			quantitySold.push_back(tempSold);
+			revenue.push_back(tempRev);
+		}
+	}
 
 	// maybe add a function to call that will find item based on sku
-	double expected = quantitySold * ((*items)[0].getRetail());
-	double discount = revenue - expected;
+	for (int i = 0; i < soldSKU.size(); i++) {
+		if (findItemFromSKU(items, soldSKU[i]) < 0) {
+			cout << "\n\nERROR: File contains SKU that does not exist\n";
+			return 0;
+		}
+		else {
+			int j = findItemFromSKU(items, soldSKU[i]);
+			double expected = quantitySold[i] * ((*items)[j].getRetail());
+			double discount = revenue[i] - expected;
 
-	// will write to a file. file can be referenced when running reports
-	cout << "Item sold: " << (*items)[0].getName() << endl;
-	cout << "Retail: " << expected << endl;
-	cout << "Discount: " << discount << endl;
-	cout << "Revenue: " << revenue << endl;
+			// will write to a file. file can be referenced when running reports
+			cout << "Item sold: " << (*items)[j].getName() << endl;
+			cout << "Retail: " << expected << endl;
+			cout << "Discount: " << discount << endl;
+			cout << "Revenue: " << revenue[i] << endl;
 
-	// quantities will be subtracted from respective items
+			// quantities will be subtracted from respective items
+		}
+	}
+	itemsFile.close();
+	salesFile.close();
+	return 1;
 }
 
 // menu
