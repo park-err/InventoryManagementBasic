@@ -1,0 +1,14 @@
+C:\Users\pwhel\source\repos\InventoryBasic2\InventoryBasic2\bin\Debug\net8.0\InventoryBasic2.exe
+C:\Users\pwhel\source\repos\InventoryBasic2\InventoryBasic2\bin\Debug\net8.0\InventoryBasic2.deps.json
+C:\Users\pwhel\source\repos\InventoryBasic2\InventoryBasic2\bin\Debug\net8.0\InventoryBasic2.runtimeconfig.json
+C:\Users\pwhel\source\repos\InventoryBasic2\InventoryBasic2\bin\Debug\net8.0\InventoryBasic2.dll
+C:\Users\pwhel\source\repos\InventoryBasic2\InventoryBasic2\bin\Debug\net8.0\InventoryBasic2.pdb
+C:\Users\pwhel\source\repos\InventoryBasic2\InventoryBasic2\obj\Debug\net8.0\InventoryBasic2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\pwhel\source\repos\InventoryBasic2\InventoryBasic2\obj\Debug\net8.0\InventoryBasic2.AssemblyInfoInputs.cache
+C:\Users\pwhel\source\repos\InventoryBasic2\InventoryBasic2\obj\Debug\net8.0\InventoryBasic2.AssemblyInfo.cs
+C:\Users\pwhel\source\repos\InventoryBasic2\InventoryBasic2\obj\Debug\net8.0\InventoryBasic2.csproj.CoreCompileInputs.cache
+C:\Users\pwhel\source\repos\InventoryBasic2\InventoryBasic2\obj\Debug\net8.0\InventoryBasic2.dll
+C:\Users\pwhel\source\repos\InventoryBasic2\InventoryBasic2\obj\Debug\net8.0\refint\InventoryBasic2.dll
+C:\Users\pwhel\source\repos\InventoryBasic2\InventoryBasic2\obj\Debug\net8.0\InventoryBasic2.pdb
+C:\Users\pwhel\source\repos\InventoryBasic2\InventoryBasic2\obj\Debug\net8.0\InventoryBasic2.genruntimeconfig.cache
+C:\Users\pwhel\source\repos\InventoryBasic2\InventoryBasic2\obj\Debug\net8.0\ref\InventoryBasic2.dll
