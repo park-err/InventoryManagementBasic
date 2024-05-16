@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\InventoryBasic",
+    "\\InventoryBasic2",
+    "\\InventoryBasic2\\InventoryBasic2",
+    "\\InventoryBasic2\\InventoryBasic2\\InvMngmt",
+    "\\InventoryBasic\\InventoryManagementBasic"
+  ],
+  "SelectedNode": "\\InventoryBasic2\\InventoryBasic2\\Program.cs",
+  "PreviewInSolutionExplorer": false
+}
